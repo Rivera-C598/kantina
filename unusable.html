@@ -12,6 +12,7 @@
   y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
 })(window, document, "clarity", "script", "z0fdxy617r");
 </script>
+<script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js"></script>
 <style>
 :root{
   --bg:#fbf7f2;--surface:#fff;--ink:#1f1a17;--muted:#6b6259;--line:#ece3d8;
@@ -20,6 +21,7 @@
   --shadow:0 10px 30px rgba(60,35,10,.07);--r:14px;
 }
 *{box-sizing:border-box}
+.lucide{width:1em;height:1em;vertical-align:-.125em;flex:none}
 body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--ink);line-height:1.45}
 button,input,select{font:inherit;color:inherit}
 button{cursor:pointer}
@@ -47,7 +49,7 @@ body.teach-enabled .teach-btn{display:inline-block}
 .item{background:#fff;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;display:flex;flex-direction:column;box-shadow:var(--shadow);cursor:pointer}
 .item:hover{box-shadow:0 14px 34px rgba(60,35,10,.12)}
 .item.sold{opacity:.6}
-.thumb{position:relative;height:110px;display:grid;place-items:center;font-size:52px;background:linear-gradient(135deg,#fff1e6,#fde7d3)}
+.thumb{position:relative;height:110px;display:grid;place-items:center;font-size:52px;color:var(--brand);background:linear-gradient(135deg,#fff1e6,#fde7d3)}
 .plus{position:absolute;right:8px;bottom:8px;width:22px;height:22px;border-radius:50%;border:0;background:rgba(255,255,255,.75);color:#d6c4b4;font-weight:900;font-size:14px;line-height:22px;padding:0}
 .item-body{padding:13px 14px 14px;display:flex;flex-direction:column;gap:6px;flex:1}
 .item h3{margin:0;font-size:15px}
@@ -63,7 +65,7 @@ body.teach-enabled .teach-btn{display:inline-block}
 .panel-body{padding:16px}
 .line{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}
 .line:last-child{border-bottom:0}
-.line .em{font-size:26px;width:44px;height:44px;border-radius:10px;background:var(--brand-soft);display:grid;place-items:center;flex:none}
+.line .em{font-size:24px;color:var(--brand);width:44px;height:44px;border-radius:10px;background:var(--brand-soft);display:grid;place-items:center;flex:none}
 .line-info{flex:1;min-width:0}.line-info strong{display:block;font-size:14px}.line-info span{font-size:11px;color:#c4b8ac}
 .qty{width:44px;border:1px solid #e3d9ce;border-radius:6px;padding:5px;text-align:center;font-size:12px}
 .x{border:0;background:none;color:#c4b8ac;font-size:18px;width:24px;height:24px;padding:0;line-height:1}
@@ -113,10 +115,10 @@ body.teaching .teach{display:block}
   <section id="menu" class="view active">
     <div class="hero"><div><h1>Items</h1><p>Select.</p></div></div>
     <div class="filters" id="filters">
-      <button class="filter on" data-cat="All">★</button>
-      <button class="filter" data-cat="Rice meals">🍚</button>
-      <button class="filter" data-cat="Snacks">🌯</button>
-      <button class="filter" data-cat="Drinks">🥤</button>
+      <button class="filter on" data-cat="All"><i data-lucide="star" aria-hidden="true"></i></button>
+      <button class="filter" data-cat="Rice meals"><i data-lucide="cooking-pot" aria-hidden="true"></i></button>
+      <button class="filter" data-cat="Snacks"><i data-lucide="cookie" aria-hidden="true"></i></button>
+      <button class="filter" data-cat="Drinks"><i data-lucide="cup-soda" aria-hidden="true"></i></button>
     </div>
     <p class="tiny">Smart Add is on.</p>
     <div class="menu-grid" id="menuGrid"></div>
@@ -203,14 +205,14 @@ if (PARAMS.get('teach') === '1') { document.body.classList.add('teach-enabled');
 
 /* ---------- Data (same as the improved version) ---------- */
 const MENU = [
-  {id:'adobo',  name:'Chicken Adobo with rice', cat:'Rice meals', price:75, emoji:'🍗', stock:true,  desc:'Soy-vinegar braised chicken, garlic rice'},
-  {id:'sisig',  name:'Pork Sisig with rice',    cat:'Rice meals', price:85, emoji:'🍳', stock:true,  desc:'Sizzling chopped pork with egg'},
-  {id:'siomai', name:'Siomai rice',             cat:'Rice meals', price:55, emoji:'🥟', stock:true,  desc:'4 pork siomai, chili-garlic, rice'},
-  {id:'pancit', name:'Pancit Canton',           cat:'Snacks',     price:50, emoji:'🍜', stock:false, desc:'Stir-fried noodles with vegetables'},
-  {id:'lumpia', name:'Lumpia (3 pcs)',          cat:'Snacks',     price:35, emoji:'🌯', stock:true,  desc:'Fried spring rolls with vinegar dip'},
-  {id:'turon',  name:'Turon',                   cat:'Snacks',     price:15, emoji:'🍌', stock:true,  desc:'Banana and langka in a crispy wrapper'},
-  {id:'icedtea',name:'Iced tea',                cat:'Drinks',     price:20, emoji:'🧋', stock:true,  desc:'House-brewed, 16 oz'},
-  {id:'buko',   name:'Buko juice',              cat:'Drinks',     price:25, emoji:'🥥', stock:false, desc:'Fresh young coconut, 16 oz'}
+  {id:'adobo',  name:'Chicken Adobo with rice', cat:'Rice meals', price:75, icon:'drumstick', stock:true,  desc:'Soy-vinegar braised chicken, garlic rice'},
+  {id:'sisig',  name:'Pork Sisig with rice',    cat:'Rice meals', price:85, icon:'egg-fried', stock:true,  desc:'Sizzling chopped pork with egg'},
+  {id:'siomai', name:'Siomai rice',             cat:'Rice meals', price:55, icon:'ham', stock:true,  desc:'4 pork siomai, chili-garlic, rice'},
+  {id:'pancit', name:'Pancit Canton',           cat:'Snacks',     price:50, icon:'soup', stock:false, desc:'Stir-fried noodles with vegetables'},
+  {id:'lumpia', name:'Lumpia (3 pcs)',          cat:'Snacks',     price:35, icon:'sandwich', stock:true,  desc:'Fried spring rolls with vinegar dip'},
+  {id:'turon',  name:'Turon',                   cat:'Snacks',     price:15, icon:'banana', stock:true,  desc:'Banana and langka in a crispy wrapper'},
+  {id:'icedtea',name:'Iced tea',                cat:'Drinks',     price:20, icon:'cup-soda', stock:true,  desc:'House-brewed, 16 oz'},
+  {id:'buko',   name:'Buko juice',              cat:'Drinks',     price:25, icon:'tree-palm', stock:false, desc:'Fresh young coconut, 16 oz'}
 ];
 const FEE = 10;
 let cart = {};
@@ -222,6 +224,8 @@ let orders = [
 ];
 
 const peso = n => '₱' + n;
+const ico = n => `<i data-lucide="${n}" aria-hidden="true"></i>`;
+const icons = () => { window.lucide && lucide.createIcons(); };
 const item = id => MENU.find(m => m.id === id);
 const subtotal = () => Object.entries(cart).reduce((s,[id,q])=>s+item(id).price*q,0);
 
@@ -259,12 +263,13 @@ document.querySelectorAll('.filter').forEach(f=>f.onclick=()=>{
 function renderMenu(){
   document.getElementById('menuGrid').innerHTML = MENU.filter(m=>filter==='All'||m.cat===filter).map(m=>`
     <article class="item ${m.stock?'':'sold'}">
-      <div class="thumb">${m.emoji}<button class="plus" onclick="addToCart('${m.id}')">+</button></div>
+      <div class="thumb">${ico(m.icon)}<button class="plus" onclick="addToCart('${m.id}')">+</button></div>
       <div class="item-body">
         <h3>${m.name}</h3><p>${m.desc}</p>
         <span class="price">${peso(m.price)}</span>
       </div>
     </article>`).join('');
+  icons();
 }
 function addToCart(id){
   const m = item(id);
@@ -282,11 +287,12 @@ function renderCart(){
   const lines = document.getElementById('cartLines');
   lines.innerHTML = !ids.length ? `<div class="empty">No items.</div>` : ids.map(id=>{ const m=item(id); return `
     <div class="line">
-      <div class="em">${m.emoji}</div>
+      <div class="em">${ico(m.icon)}</div>
       <div class="line-info"><strong>${m.name}</strong><span>${peso(m.price)}</span></div>
       <input class="qty" value="${cart[id]}" onchange="setQty('${id}',this.value)">
       <button class="x" onclick="removeItem('${id}')">×</button>
     </div>`; }).join('');
+  icons();
   document.getElementById('itemCount').textContent = Object.values(cart).reduce((a,b)=>a+b,0);
 }
 function setQty(id, v){

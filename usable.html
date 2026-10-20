@@ -12,6 +12,7 @@
   y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
 })(window, document, "clarity", "script", "z0fdxy617r");
 </script>
+<script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js"></script>
 <style>
 :root{
   --bg:#fbf7f2;--surface:#fff;--ink:#1f1a17;--muted:#6b6259;--line:#ece3d8;
@@ -20,6 +21,7 @@
   --ai:#6d28d9;--ai-bg:#f5f3ff;--shadow:0 10px 30px rgba(60,35,10,.07);--r:14px;
 }
 *{box-sizing:border-box}
+.lucide{width:1em;height:1em;vertical-align:-.125em;flex:none}
 body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--ink);line-height:1.45}
 button,input,select{font:inherit;color:inherit}
 button{cursor:pointer}
@@ -46,7 +48,7 @@ body.teach-enabled .teach-btn{display:inline-block}
 .filter[aria-pressed="true"]{background:var(--ink);color:#fff;border-color:var(--ink)}
 .menu-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px}
 .item{background:#fff;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;display:flex;flex-direction:column;box-shadow:var(--shadow)}
-.thumb{height:110px;display:grid;place-items:center;font-size:52px;background:linear-gradient(135deg,#fff1e6,#fde7d3)}
+.thumb{height:110px;display:grid;place-items:center;font-size:52px;color:var(--brand);background:linear-gradient(135deg,#fff1e6,#fde7d3)}
 .item.sold .thumb{filter:grayscale(1);opacity:.55}
 .item-body{padding:13px 14px 14px;display:flex;flex-direction:column;gap:6px;flex:1}
 .item h3{margin:0;font-size:15px}
@@ -70,7 +72,7 @@ body.teach-enabled .teach-btn{display:inline-block}
 .panel-body{padding:16px}
 .line{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}
 .line:last-child{border-bottom:0}
-.line .em{font-size:26px;width:44px;height:44px;border-radius:10px;background:var(--brand-soft);display:grid;place-items:center;flex:none}
+.line .em{font-size:24px;color:var(--brand);width:44px;height:44px;border-radius:10px;background:var(--brand-soft);display:grid;place-items:center;flex:none}
 .line-info{flex:1;min-width:0}.line-info strong{display:block;font-size:14px}.line-info span{font-size:12px;color:var(--muted)}
 .stepper{display:flex;align-items:center;border:1px solid #d6cabd;border-radius:10px;overflow:hidden;flex:none}
 .stepper button{border:0;background:#fff;width:34px;height:34px;font-size:16px;font-weight:800}
@@ -140,10 +142,10 @@ body.teaching .teach{display:block}
   <div class="topbar-inner">
     <div class="brand"><div class="logo">K</div><div><strong>Kantina</strong><span>Campus canteen pre-order</span></div></div>
     <nav class="nav" aria-label="Main">
-      <button data-view="menu" class="active"><span aria-hidden="true">🍽️</span>Menu</button>
-      <button data-view="cart"><span aria-hidden="true">🛒</span>Cart <span class="badge" id="cartBadge" hidden>0</span></button>
-      <button data-view="orders"><span aria-hidden="true">🧾</span>My Orders</button>
-      <button data-view="help"><span aria-hidden="true">❔</span>Help</button>
+      <button data-view="menu" class="active"><i data-lucide="utensils" aria-hidden="true"></i>Menu</button>
+      <button data-view="cart"><i data-lucide="shopping-cart" aria-hidden="true"></i>Cart <span class="badge" id="cartBadge" hidden>0</span></button>
+      <button data-view="orders"><i data-lucide="receipt" aria-hidden="true"></i>My Orders</button>
+      <button data-view="help"><i data-lucide="circle-help" aria-hidden="true"></i>Help</button>
     </nav>
     <button class="teach-btn" id="teachBtn" aria-pressed="false">Teaching Notes: Off</button>
   </div>
@@ -159,9 +161,9 @@ body.teaching .teach{display:block}
     </div>
     <div class="filters" role="group" aria-label="Filter by category" id="filters">
       <button class="filter" aria-pressed="true" data-cat="All">All</button>
-      <button class="filter" aria-pressed="false" data-cat="Rice meals">🍚 Rice meals</button>
-      <button class="filter" aria-pressed="false" data-cat="Snacks">🌯 Snacks</button>
-      <button class="filter" aria-pressed="false" data-cat="Drinks">🥤 Drinks</button>
+      <button class="filter" aria-pressed="false" data-cat="Rice meals"><i data-lucide="cooking-pot" aria-hidden="true"></i> Rice meals</button>
+      <button class="filter" aria-pressed="false" data-cat="Snacks"><i data-lucide="cookie" aria-hidden="true"></i> Snacks</button>
+      <button class="filter" aria-pressed="false" data-cat="Drinks"><i data-lucide="cup-soda" aria-hidden="true"></i> Drinks</button>
     </div>
     <div class="menu-grid" id="menuGrid"></div>
     <div class="teach"><strong>Visibility of system status + affordance:</strong> every card has a labeled "Add to cart" button. Adding shows a message and updates the cart count, so users know the click worked.</div>
@@ -221,7 +223,7 @@ body.teaching .teach{display:block}
   <!-- CONFIRMATION -->
   <section id="confirm" class="view">
     <div class="panel confirm-card">
-      <div class="check" aria-hidden="true">✓</div>
+      <div class="check"><i data-lucide="check" aria-hidden="true"></i></div>
       <h1>Order placed</h1>
       <p class="help">Show this order number at the counter.</p>
       <div class="ref" id="confRef">K-0000</div>
@@ -291,17 +293,17 @@ if (PARAMS.get('teach') === '1') { document.body.classList.add('teach-enabled');
 
 /* ---------- Data ---------- */
 const MENU = [
-  {id:'adobo',  name:'Chicken Adobo with rice', cat:'Rice meals', price:75, emoji:'🍗', stock:true,  desc:'Soy-vinegar braised chicken, garlic rice'},
-  {id:'sisig',  name:'Pork Sisig with rice',    cat:'Rice meals', price:85, emoji:'🍳', stock:true,  desc:'Sizzling chopped pork with egg'},
-  {id:'siomai', name:'Siomai rice',             cat:'Rice meals', price:55, emoji:'🥟', stock:true,  desc:'4 pork siomai, chili-garlic, rice'},
-  {id:'pancit', name:'Pancit Canton',           cat:'Snacks',     price:50, emoji:'🍜', stock:false, desc:'Stir-fried noodles with vegetables'},
-  {id:'lumpia', name:'Lumpia (3 pcs)',          cat:'Snacks',     price:35, emoji:'🌯', stock:true,  desc:'Fried spring rolls with vinegar dip'},
-  {id:'turon',  name:'Turon',                   cat:'Snacks',     price:15, emoji:'🍌', stock:true,  desc:'Banana and langka in a crispy wrapper'},
-  {id:'icedtea',name:'Iced tea',                cat:'Drinks',     price:20, emoji:'🧋', stock:true,  desc:'House-brewed, 16 oz'},
-  {id:'buko',   name:'Buko juice',              cat:'Drinks',     price:25, emoji:'🥥', stock:false, desc:'Fresh young coconut, 16 oz'}
+  {id:'adobo',  name:'Chicken Adobo with rice', cat:'Rice meals', price:75, icon:'drumstick', stock:true,  desc:'Soy-vinegar braised chicken, garlic rice'},
+  {id:'sisig',  name:'Pork Sisig with rice',    cat:'Rice meals', price:85, icon:'egg-fried', stock:true,  desc:'Sizzling chopped pork with egg'},
+  {id:'siomai', name:'Siomai rice',             cat:'Rice meals', price:55, icon:'ham', stock:true,  desc:'4 pork siomai, chili-garlic, rice'},
+  {id:'pancit', name:'Pancit Canton',           cat:'Snacks',     price:50, icon:'soup', stock:false, desc:'Stir-fried noodles with vegetables'},
+  {id:'lumpia', name:'Lumpia (3 pcs)',          cat:'Snacks',     price:35, icon:'sandwich', stock:true,  desc:'Fried spring rolls with vinegar dip'},
+  {id:'turon',  name:'Turon',                   cat:'Snacks',     price:15, icon:'banana', stock:true,  desc:'Banana and langka in a crispy wrapper'},
+  {id:'icedtea',name:'Iced tea',                cat:'Drinks',     price:20, icon:'cup-soda', stock:true,  desc:'House-brewed, 16 oz'},
+  {id:'buko',   name:'Buko juice',              cat:'Drinks',     price:25, icon:'tree-palm', stock:false, desc:'Fresh young coconut, 16 oz'}
 ];
 const PACKAGING = 10;
-const STATUS = {prep:'⏳ Preparing', ready:'✓ Ready for pickup', done:'✓ Picked up', cancel:'✕ Cancelled'};
+const STATUS = {prep:ico('hourglass')+' Preparing', ready:ico('circle-check')+' Ready for pickup', done:ico('check')+' Picked up', cancel:ico('circle-x')+' Cancelled'};
 let cart = {};
 let filter = 'All';
 let nextRef = 418;
@@ -312,6 +314,8 @@ let orders = [
 ];
 
 const peso = n => '₱' + n;
+const ico = n => `<i data-lucide="${n}" aria-hidden="true"></i>`;
+const icons = () => { window.lucide && lucide.createIcons(); };
 const item = id => MENU.find(m => m.id === id);
 const cartCount = () => Object.values(cart).reduce((a,b)=>a+b,0);
 const subtotal = () => Object.entries(cart).reduce((s,[id,q])=>s+item(id).price*q,0);
@@ -354,9 +358,9 @@ document.querySelectorAll('.filter').forEach(f=>f.onclick=()=>{
 function renderMenu(){
   document.getElementById('menuGrid').innerHTML = MENU.filter(m=>filter==='All'||m.cat===filter).map(m=>`
     <article class="item ${m.stock?'':'sold'}">
-      <div class="thumb" aria-hidden="true">${m.emoji}</div>
+      <div class="thumb">${ico(m.icon)}</div>
       <div class="item-body">
-        <span class="stock ${m.stock?'in':'out'}">${m.stock?'✓ Available':'✕ Sold out today'}</span>
+        <span class="stock ${m.stock?'in':'out'}">${m.stock?ico('check')+' Available':ico('x')+' Sold out today'}</span>
         <h3>${m.name}</h3><p>${m.desc}</p>
         <div class="item-foot">
           <span class="price">${peso(m.price)}</span>
@@ -366,6 +370,7 @@ function renderMenu(){
         </div>
       </div>
     </article>`).join('');
+  icons();
 }
 function addToCart(id){
   cart[id] = (cart[id]||0) + 1;
@@ -389,16 +394,16 @@ function renderCart(){
   const ids = Object.keys(cart);
   const lines = document.getElementById('cartLines');
   if (!ids.length){
-    lines.innerHTML = `<div class="empty"><div class="big" aria-hidden="true">🛒</div><p>Your cart is empty.</p><button class="btn btn-primary" onclick="go('menu')">Browse the menu</button></div>`;
+    lines.innerHTML = `<div class="empty"><div class="big">${ico('shopping-cart')}</div><p>Your cart is empty.</p><button class="btn btn-primary" onclick="go('menu')">Browse the menu</button></div>`;
   } else {
     lines.innerHTML = ids.map(id=>{ const m=item(id), q=cart[id]; return `
       <div class="line">
-        <div class="em" aria-hidden="true">${m.emoji}</div>
+        <div class="em">${ico(m.icon)}</div>
         <div class="line-info"><strong>${m.name}</strong><span>${peso(m.price)} each · <button class="btn-link" onclick="removeItem('${id}')">Remove</button></span></div>
         <div class="stepper" role="group" aria-label="Quantity of ${m.name}">
-          <button type="button" aria-label="Decrease" onclick="changeQty('${id}',-1)">−</button>
+          <button type="button" aria-label="Decrease" onclick="changeQty('${id}',-1)">${ico('minus')}</button>
           <output>${q}</output>
-          <button type="button" aria-label="Increase" onclick="changeQty('${id}',1)">+</button>
+          <button type="button" aria-label="Increase" onclick="changeQty('${id}',1)">${ico('plus')}</button>
         </div>
         <div class="line-total">${peso(m.price*q)}</div>
       </div>`; }).join('');
@@ -410,6 +415,7 @@ function renderCart(){
   document.getElementById('sumTotal').textContent = peso(total);
   document.getElementById('placeBtn').textContent = ids.length ? `Place order · ${peso(total)}` : 'Place order';
   renderAI();
+  icons();
 }
 function changeQty(id, d){
   if ((cart[id]||0) + d <= 0) { removeItem(id); return; }
@@ -427,10 +433,11 @@ function renderAI(){
   const hasDrink = ids.some(id=>item(id).cat==='Drinks');
   if (!hasMeal || hasDrink || aiDismissed){ slot.innerHTML=''; return; }
   slot.innerHTML = `<div class="ai-card">
-    <h3>✨ Suggestion: add a drink?</h3>
+    <h3>${ico('sparkles')} Suggestion: add a drink?</h3>
     <p>Students often pair rice meals with Iced tea (${peso(20)}). This is only a suggestion. Nothing is added unless you choose it.</p>
     <div class="ai-actions"><button type="button" onclick="acceptAI()">Add Iced tea</button><button type="button" onclick="dismissAI()">No thanks</button></div>
   </div>`;
+  icons();
 }
 function acceptAI(){ cart.icedtea=(cart.icedtea||0)+1; track('ai_suggestion_accepted'); renderCart(); updateBadge(); }
 function dismissAI(){ aiDismissed=true; track('ai_suggestion_dismissed'); renderAI(); }
@@ -470,6 +477,7 @@ function renderOrders(){
       <td><span class="status ${o.status}">${STATUS[o.status]}</span></td>
       <td>${o.status==='prep' ? `<button class="btn btn-danger" onclick="askCancel('${o.ref}')">Cancel order</button>` : '<span class="help">—</span>'}</td>
     </tr>`).join('');
+  icons();
 }
 function closeModal(){ document.getElementById('modal').classList.remove('show'); }
 document.getElementById('modalCancel').onclick = closeModal;
