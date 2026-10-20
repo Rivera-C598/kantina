@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kantina - Campus Pre-Order - Needs Improvement</title>
+<!-- Microsoft Clarity: replace YOUR_CLARITY_ID with the Project ID from Clarity > Settings > Setup -->
+<script type="text/javascript">
+(function(c,l,a,r,i,t,y){
+  c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+  t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+  y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+})(window, document, "clarity", "script", "YOUR_CLARITY_ID");
+</script>
+<style>
+:root{
+  --bg:#fbf7f2;--surface:#fff;--ink:#1f1a17;--muted:#6b6259;--line:#ece3d8;
+  --brand:#c2410c;--brand-2:#9a3412;--brand-soft:#fff1e6;
+  --ok:#067647;--ok-bg:#ecfdf3;--danger:#b42318;
+  --shadow:0 10px 30px rgba(60,35,10,.07);--r:14px;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--ink);line-height:1.45}
+button,input,select{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:3px solid #fdba74;outline-offset:2px}
+.topbar{position:sticky;top:0;z-index:10;background:#fff;border-bottom:1px solid var(--line)}
+.topbar-inner{max-width:1100px;margin:auto;padding:12px 20px;display:flex;align-items:center;gap:16px}
+.brand{display:flex;align-items:center;gap:10px;margin-right:auto}
+.logo{width:38px;height:38px;border-radius:10px;background:var(--brand);color:#fff;display:grid;place-items:center;font-weight:900;font-size:18px}
+.brand strong{display:block;font-size:15px}.brand span{font-size:11px;color:var(--muted)}
+.nav{display:flex;gap:4px}
+.nav button{border:0;background:transparent;padding:9px 12px;border-radius:9px;font-weight:700;color:#4a3f36;white-space:nowrap}
+.nav button:hover{background:#f6efe7}
+.nav button.active{background:var(--brand-soft);color:var(--brand-2)}
+.teach-btn{display:none;border:1px solid #c4b5fd;background:#faf5ff;color:#5b21b6;border-radius:9px;padding:8px 10px;font-weight:800;font-size:12px}
+body.teach-enabled .teach-btn{display:inline-block}
+.content{max-width:1100px;margin:auto;padding:24px 20px 80px}
+.view{display:none}.view.active{display:block}
+.hero{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;margin-bottom:18px;flex-wrap:wrap}
+.hero h1{font-size:24px;margin:0 0 4px}.hero p{margin:0;color:var(--muted);font-size:13px}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px}
+.filter{border:1px solid var(--line);background:#fff;border-radius:999px;width:40px;height:36px;font-size:16px}
+.filter.on{border-color:#e8c9b0}
+.tiny{font-size:11px;color:#b8ada2;margin:0 0 14px}
+.menu-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px}
+.item{background:#fff;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;display:flex;flex-direction:column;box-shadow:var(--shadow);cursor:pointer}
+.item:hover{box-shadow:0 14px 34px rgba(60,35,10,.12)}
+.item.sold{opacity:.6}
+.thumb{position:relative;height:110px;display:grid;place-items:center;font-size:52px;background:linear-gradient(135deg,#fff1e6,#fde7d3)}
+.plus{position:absolute;right:8px;bottom:8px;width:22px;height:22px;border-radius:50%;border:0;background:rgba(255,255,255,.75);color:#d6c4b4;font-weight:900;font-size:14px;line-height:22px;padding:0}
+.item-body{padding:13px 14px 14px;display:flex;flex-direction:column;gap:6px;flex:1}
+.item h3{margin:0;font-size:15px}
+.item p{margin:0;font-size:12px;color:var(--muted)}
+.price{font-weight:700;font-size:14px;color:#c4b8ac;margin-top:auto;padding-top:6px}
+.btn{border:0;border-radius:10px;padding:9px 14px;font-weight:800;font-size:13px}
+.btn-primary{background:var(--brand);color:#fff}.btn-primary:hover{background:var(--brand-2)}
+.btn-outline{background:#fff;border:1px solid #d6cabd;color:#3f3730}
+.layout{display:grid;grid-template-columns:1.35fr 1fr;gap:16px;align-items:start}
+.panel{background:#fff;border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow)}
+.panel-head{padding:14px 16px;border-bottom:1px solid var(--line)}
+.panel-head h2{margin:0;font-size:15px}.panel-head p{margin:2px 0 0;font-size:12px;color:var(--muted)}
+.panel-body{padding:16px}
+.line{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}
+.line:last-child{border-bottom:0}
+.line .em{font-size:26px;width:44px;height:44px;border-radius:10px;background:var(--brand-soft);display:grid;place-items:center;flex:none}
+.line-info{flex:1;min-width:0}.line-info strong{display:block;font-size:14px}.line-info span{font-size:11px;color:#c4b8ac}
+.qty{width:44px;border:1px solid #e3d9ce;border-radius:6px;padding:5px;text-align:center;font-size:12px}
+.x{border:0;background:none;color:#c4b8ac;font-size:18px;width:24px;height:24px;padding:0;line-height:1}
+.field{margin-bottom:16px}
+label{display:block;font-size:13px;font-weight:800;margin-bottom:6px}
+select{width:100%;border:1px solid #c9bcae;border-radius:10px;padding:10px 11px;background:#fff}
+.summary-row{display:flex;justify-content:space-between;font-size:13px;padding:10px 0;border-top:1px solid var(--line);margin-bottom:14px;color:#4a3f36}
+.help{font-size:12px;color:var(--muted);margin:6px 0 0}
+.empty{text-align:center;padding:30px 16px;color:#b8ada2;font-size:13px}
+.table-wrap{overflow-x:auto}
+.table{width:100%;border-collapse:collapse;font-size:13px;min-width:520px}
+.table th,.table td{padding:11px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:middle}
+.table th{font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);background:#fcfaf7}
+.dot{display:inline-block;width:11px;height:11px;border-radius:50%}
+.dot.prep{background:#f59e0b}.dot.ready{background:#22c55e}.dot.done{background:#a8a29e}
+.faq{display:grid;gap:16px}
+.faq strong{font-size:14px}
+.toast{position:fixed;right:16px;top:74px;background:#1f1a17;color:#fff;padding:7px 11px;border-radius:8px;font-size:11px;display:none;z-index:40}
+.toast.show{display:block}
+.teach{display:none;margin:12px 0 0;padding:10px 12px;border-left:4px solid #7c3aed;background:#f5f3ff;color:#4c1d95;border-radius:8px;font-size:12px}
+body.teaching .teach{display:block}
+@media(max-width:820px){
+  .layout{grid-template-columns:1fr}
+  .topbar-inner{flex-wrap:wrap;gap:10px;padding:10px 14px}
+  .nav{width:100%;overflow-x:auto;order:3}
+  .content{padding:18px 14px 80px}
+}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="brand"><div class="logo">K</div><div><strong>Kantina</strong><span>Campus canteen pre-order</span></div></div>
+    <nav class="nav">
+      <button data-view="menu" class="active">Items</button>
+      <button data-view="cart">Bag</button>
+      <button data-view="orders">Log</button>
+      <button data-view="help">?</button>
+    </nav>
+    <button class="teach-btn" id="teachBtn" aria-pressed="false">Teaching Notes: Off</button>
+  </div>
+</header>
+
+<main class="content">
+
+  <!-- MENU -->
+  <section id="menu" class="view active">
+    <div class="hero"><div><h1>Items</h1><p>Select.</p></div></div>
+    <div class="filters" id="filters">
+      <button class="filter on" data-cat="All">★</button>
+      <button class="filter" data-cat="Rice meals">🍚</button>
+      <button class="filter" data-cat="Snacks">🌯</button>
+      <button class="filter" data-cat="Drinks">🥤</button>
+    </div>
+    <p class="tiny">Smart Add is on.</p>
+    <div class="menu-grid" id="menuGrid"></div>
+    <div class="teach"><strong>Affordance + visibility of system status:</strong> the whole card looks clickable but does nothing. The real "+" button is tiny and low-contrast, and adding gives no feedback (no message, no cart count). Watch for dead clicks and rage clicks here.</div>
+    <div class="teach"><strong>Accessibility:</strong> sold-out items are only slightly faded. Clicking "+" on them silently does nothing. Filters are icons with no labels, and prices are low-contrast.</div>
+    <div class="teach"><strong>Responsible AI:</strong> "Smart Add is on" is never explained. It quietly adds Iced tea whenever a rice meal is added, so users find items in their bag they never chose.</div>
+  </section>
+
+  <!-- CART -->
+  <section id="cart" class="view">
+    <div class="hero"><div><h1>Bag</h1><p>Review.</p></div></div>
+    <div class="layout">
+      <div class="panel">
+        <div class="panel-head"><h2>Contents</h2></div>
+        <div class="panel-body">
+          <div id="cartLines"></div>
+          <div class="teach"><strong>User control + freedom:</strong> "×" removes an item instantly with no Undo. Quantity is a free-text box with no − / + buttons, and line totals aren't shown.</div>
+        </div>
+      </div>
+      <div class="panel">
+        <div class="panel-head"><h2>Details</h2></div>
+        <div class="panel-body">
+          <div class="field">
+            <label for="slot">Slot</label>
+            <select id="slot">
+              <option value="">Choose</option>
+              <option>10:30</option><option>11:00</option><option>11:30</option>
+              <option>12:00</option><option>12:30</option><option>13:00</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="mode">Mode</label>
+            <select id="mode"><option>CASH</option><option>EWALLET</option></select>
+          </div>
+          <div class="summary-row"><span>Items</span><span id="itemCount">0</span></div>
+          <button class="btn btn-primary" style="width:100%" onclick="proceed()">Proceed</button>
+          <div class="teach"><strong>Match with the real world:</strong> "Slot," "Mode," "EWALLET," and 24-hour times like "13:00" make users translate the system's language into their own.</div>
+          <div class="teach"><strong>Error prevention + recovery:</strong> nothing marks "Slot" as required. Leaving it blank shows "ERR_SLOT_NULL" for a moment in the corner. Proceeding with an empty bag says "Done" even though nothing happened.</div>
+          <div class="teach"><strong>Transparency:</strong> no total is shown before ordering, and a ₱10 fee only appears afterward in the Log. "Proceed" doesn't say it will place the order.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ORDERS -->
+  <section id="orders" class="view">
+    <div class="hero"><div><h1>Log</h1><p>Entries.</p></div></div>
+    <div class="panel">
+      <div class="panel-body">
+        <div class="table-wrap">
+          <table class="table">
+            <thead><tr><th>#</th><th>Items</th><th>Amt</th><th>St</th><th></th></tr></thead>
+            <tbody id="ordersBody"></tbody>
+          </table>
+        </div>
+        <div class="teach"><strong>Feedback + closure:</strong> there's no confirmation screen or order number to show at the counter, only a brief "Done." The amount includes a fee the user never saw.</div>
+        <div class="teach"><strong>Error prevention + accessibility:</strong> "×" cancels an order instantly with no confirmation, and the row disappears, so users can't tell if it was cancelled or deleted. Status is a colored dot only, and the pickup time isn't shown.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HELP -->
+  <section id="help" class="view">
+    <div class="hero"><div><h1>Help</h1><p>Common questions about pre-ordering.</p></div></div>
+    <div class="panel"><div class="panel-body faq">
+      <div><strong>How do I order?</strong><p class="help">Add items, then go to your Bag and proceed.</p></div>
+      <div><strong>Can I change an order after placing it?</strong><p class="help">Orders may be cancelled from the Log.</p></div>
+      <div><strong>What is Smart Add?</strong><p class="help">Smart Add improves your order automatically.</p></div>
+    </div></div>
+  </section>
+
+</main>
+
+<div id="toast" class="toast" role="status"></div>
+
+<script>
+/* ---------- Clarity helpers ---------- */
+const PARAMS = new URLSearchParams(location.search);
+function track(name){ try{ window.clarity && window.clarity('event', name); }catch(e){} }
+function tag(k,v){ try{ window.clarity && window.clarity('set', k, v); }catch(e){} }
+tag('version','unusable');
+if (PARAMS.get('p')) tag('participant', PARAMS.get('p'));       // e.g. ?p=A1 to match observer notes
+if (PARAMS.get('teach') === '1') { document.body.classList.add('teach-enabled'); tag('mode','teach'); }
+
+/* ---------- Data (same as the improved version) ---------- */
+const MENU = [
+  {id:'adobo',  name:'Chicken Adobo with rice', cat:'Rice meals', price:75, emoji:'🍗', stock:true,  desc:'Soy-vinegar braised chicken, garlic rice'},
+  {id:'sisig',  name:'Pork Sisig with rice',    cat:'Rice meals', price:85, emoji:'🍳', stock:true,  desc:'Sizzling chopped pork with egg'},
+  {id:'siomai', name:'Siomai rice',             cat:'Rice meals', price:55, emoji:'🥟', stock:true,  desc:'4 pork siomai, chili-garlic, rice'},
+  {id:'pancit', name:'Pancit Canton',           cat:'Snacks',     price:50, emoji:'🍜', stock:false, desc:'Stir-fried noodles with vegetables'},
+  {id:'lumpia', name:'Lumpia (3 pcs)',          cat:'Snacks',     price:35, emoji:'🌯', stock:true,  desc:'Fried spring rolls with vinegar dip'},
+  {id:'turon',  name:'Turon',                   cat:'Snacks',     price:15, emoji:'🍌', stock:true,  desc:'Banana and langka in a crispy wrapper'},
+  {id:'icedtea',name:'Iced tea',                cat:'Drinks',     price:20, emoji:'🧋', stock:true,  desc:'House-brewed, 16 oz'},
+  {id:'buko',   name:'Buko juice',              cat:'Drinks',     price:25, emoji:'🥥', stock:false, desc:'Fresh young coconut, 16 oz'}
+];
+const FEE = 10;
+let cart = {};
+let filter = 'All';
+let nextRef = 418;
+let orders = [
+  {ref:'417', items:'Siomai rice ×1, Iced tea ×1', total:85, status:'ready'},
+  {ref:'412', items:'Lumpia (3 pcs) ×2', total:80, status:'done'}
+];
+
+const peso = n => '₱' + n;
+const item = id => MENU.find(m => m.id === id);
+const subtotal = () => Object.entries(cart).reduce((s,[id,q])=>s+item(id).price*q,0);
+
+/* ---------- Navigation (each view gets its own URL so Clarity can separate heatmaps) ---------- */
+const VIEWS = ['menu','cart','orders','help'];
+function show(view){
+  document.querySelectorAll('.view').forEach(v=>v.classList.toggle('active', v.id===view));
+  document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active', b.dataset.view===view));
+  if (view==='cart') renderCart();
+  if (view==='orders') renderOrders();
+  window.scrollTo(0,0);
+}
+function go(view){
+  const p = new URLSearchParams(location.search); p.set('view', view);
+  history.pushState({view}, '', '?' + p.toString());
+  show(view);
+}
+window.addEventListener('popstate', ()=>{ const v = new URLSearchParams(location.search).get('view'); show(VIEWS.includes(v)?v:'menu'); });
+document.querySelectorAll('.nav button').forEach(b=>b.onclick=()=>go(b.dataset.view));
+
+/* ---------- Toast: tiny, far corner, short-lived ---------- */
+let toastTimer;
+function toast(msg){
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  clearTimeout(toastTimer); toastTimer = setTimeout(()=>t.classList.remove('show'), 1500);
+}
+
+/* ---------- Menu ---------- */
+document.querySelectorAll('.filter').forEach(f=>f.onclick=()=>{
+  filter = f.dataset.cat;
+  document.querySelectorAll('.filter').forEach(x=>x.classList.toggle('on', x===f));
+  renderMenu();
+});
+function renderMenu(){
+  document.getElementById('menuGrid').innerHTML = MENU.filter(m=>filter==='All'||m.cat===filter).map(m=>`
+    <article class="item ${m.stock?'':'sold'}">
+      <div class="thumb">${m.emoji}<button class="plus" onclick="addToCart('${m.id}')">+</button></div>
+      <div class="item-body">
+        <h3>${m.name}</h3><p>${m.desc}</p>
+        <span class="price">${peso(m.price)}</span>
+      </div>
+    </article>`).join('');
+}
+function addToCart(id){
+  const m = item(id);
+  if (!m.stock){ track('sold_out_click'); return; }            // silently ignored
+  cart[id] = (cart[id]||0) + 1;
+  track('item_added');
+  if (m.cat==='Rice meals' && !cart.icedtea){                 // "Smart Add": silent automation
+    cart.icedtea = 1; track('ai_auto_added');
+  }
+}
+
+/* ---------- Bag ---------- */
+function renderCart(){
+  const ids = Object.keys(cart);
+  const lines = document.getElementById('cartLines');
+  lines.innerHTML = !ids.length ? `<div class="empty">No items.</div>` : ids.map(id=>{ const m=item(id); return `
+    <div class="line">
+      <div class="em">${m.emoji}</div>
+      <div class="line-info"><strong>${m.name}</strong><span>${peso(m.price)}</span></div>
+      <input class="qty" value="${cart[id]}" onchange="setQty('${id}',this.value)">
+      <button class="x" onclick="removeItem('${id}')">×</button>
+    </div>`; }).join('');
+  document.getElementById('itemCount').textContent = Object.values(cart).reduce((a,b)=>a+b,0);
+}
+function setQty(id, v){
+  const n = parseInt(v,10);
+  if (n > 0) cart[id] = n; else delete cart[id];
+  renderCart();
+}
+function removeItem(id){ delete cart[id]; track('item_removed'); renderCart(); }
+
+function proceed(){
+  const ids = Object.keys(cart);
+  const slot = document.getElementById('slot');
+  if (!ids.length){ toast('Done'); track('blank_submit'); return; }
+  if (!slot.value){ toast('ERR_SLOT_NULL'); track('checkout_error'); return; }
+  orders.unshift({ref: String(nextRef++), items: ids.map(id=>`${item(id).name} ×${cart[id]}`).join(', '), total: subtotal()+FEE, status:'prep'});
+  cart = {}; slot.value = '';
+  track('order_placed');
+  toast('Done');
+  setTimeout(()=>go('orders'), 600);
+}
+
+/* ---------- Log ---------- */
+function renderOrders(){
+  document.getElementById('ordersBody').innerHTML = orders.map(o=>`
+    <tr>
+      <td>${o.ref}</td><td>${o.items}</td><td>${peso(o.total)}</td>
+      <td><span class="dot ${o.status}"></span></td>
+      <td>${o.status==='prep' ? `<button class="x" onclick="cancelOrder('${o.ref}')">×</button>` : ''}</td>
+    </tr>`).join('');
+}
+function cancelOrder(ref){
+  orders = orders.filter(o=>o.ref!==ref);
+  track('order_cancelled');
+  renderOrders();
+}
+
+/* ---------- Teaching notes (button only appears with ?teach=1) ---------- */
+document.getElementById('teachBtn').onclick = function(){
+  const on = document.body.classList.toggle('teaching');
+  this.textContent = 'Teaching Notes: ' + (on ? 'On' : 'Off');
+  this.setAttribute('aria-pressed', on);
+};
+
+/* ---------- Init ---------- */
+renderMenu();
+const startView = PARAMS.get('view');
+show(VIEWS.includes(startView) ? startView : 'menu');
+</script>
+</body>
+</html>
