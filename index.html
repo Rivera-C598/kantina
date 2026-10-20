@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kantina - Usability Test</title>
+<style>
+:root{--bg:#fbf7f2;--ink:#1f1a17;--muted:#6b6259;--line:#ece3d8;--brand:#c2410c;--brand-2:#9a3412;--danger:#b42318}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;display:grid;place-items:center;padding:24px 16px;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--ink);line-height:1.45}
+.card{width:min(460px,100%);background:#fff;border:1px solid var(--line);border-radius:18px;padding:28px 24px;box-shadow:0 10px 30px rgba(60,35,10,.07)}
+.logo{width:44px;height:44px;border-radius:12px;background:var(--brand);color:#fff;display:grid;place-items:center;font-weight:900;font-size:20px;margin-bottom:14px}
+h1{margin:0 0 4px;font-size:22px}
+p{margin:0;color:var(--muted);font-size:14px}
+label{display:block;font-weight:800;font-size:13px;margin:22px 0 6px}
+input{width:100%;font:inherit;font-size:16px;border:1px solid #c9bcae;border-radius:10px;padding:11px 12px;text-transform:uppercase}
+input:focus{outline:3px solid #fdba74;outline-offset:1px}
+.help{font-size:12px;margin-top:6px}
+.error{display:none;color:var(--danger);font-size:12px;font-weight:700;margin-top:6px}
+.has-error input{border-color:var(--danger)}
+.has-error .error{display:block}
+.versions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:20px}
+button{font:inherit;cursor:pointer;border:0;border-radius:12px;padding:14px 12px;font-weight:800;font-size:15px;background:var(--brand);color:#fff}
+button:hover{background:var(--brand-2)}
+button:focus-visible{outline:3px solid #fdba74;outline-offset:2px}
+.note{margin-top:20px;padding-top:16px;border-top:1px solid var(--line);font-size:12px}
+</style>
+</head>
+<body>
+<main class="card">
+  <div class="logo" aria-hidden="true">K</div>
+  <h1>Kantina usability test</h1>
+  <p>You'll try a campus canteen pre-order site. There are no wrong answers. We're testing the design, not you.</p>
+
+  <form id="f" novalidate>
+    <div id="field">
+      <label for="code">Your participant code</label>
+      <input id="code" autocomplete="off" maxlength="12" placeholder="e.g. A1">
+      <div class="error">Enter the code your instructor gave you.</div>
+      <p class="help">Your instructor will give you this code.</p>
+    </div>
+    <div class="versions">
+      <button type="submit" data-file="unusable.html">Version A</button>
+      <button type="submit" data-file="usable.html">Version B</button>
+    </div>
+  </form>
+
+  <p class="note">Your instructor will tell you which version to start with. Your clicks and scrolling are recorded anonymously for this class activity. Typed text is hidden.</p>
+</main>
+
+<script>
+const input = document.getElementById('code');
+try { input.value = localStorage.getItem('kantina_p') || ''; } catch(e) {}
+let target = null;
+document.querySelectorAll('button[data-file]').forEach(b => b.addEventListener('click', () => target = b.dataset.file));
+document.getElementById('f').addEventListener('submit', e => {
+  e.preventDefault();
+  const code = input.value.trim().toUpperCase().replace(/[^A-Z0-9-]/g, '');
+  if (!code) { document.getElementById('field').classList.add('has-error'); input.focus(); return; }
+  try { localStorage.setItem('kantina_p', code); } catch(e) {}
+  location.href = target + '?p=' + encodeURIComponent(code);
+});
+input.addEventListener('input', () => document.getElementById('field').classList.remove('has-error'));
+</script>
+</body>
+</html>
