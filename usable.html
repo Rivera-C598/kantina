@@ -303,6 +303,8 @@ const MENU = [
   {id:'buko',   name:'Buko juice',              cat:'Drinks',     price:25, icon:'tree-palm', stock:false, desc:'Fresh young coconut, 16 oz'}
 ];
 const PACKAGING = 10;
+const ico = n => `<i data-lucide="${n}" aria-hidden="true"></i>`;
+const icons = () => { window.lucide && lucide.createIcons(); };
 const STATUS = {prep:ico('hourglass')+' Preparing', ready:ico('circle-check')+' Ready for pickup', done:ico('check')+' Picked up', cancel:ico('circle-x')+' Cancelled'};
 let cart = {};
 let filter = 'All';
@@ -314,8 +316,6 @@ let orders = [
 ];
 
 const peso = n => '₱' + n;
-const ico = n => `<i data-lucide="${n}" aria-hidden="true"></i>`;
-const icons = () => { window.lucide && lucide.createIcons(); };
 const item = id => MENU.find(m => m.id === id);
 const cartCount = () => Object.values(cart).reduce((a,b)=>a+b,0);
 const subtotal = () => Object.entries(cart).reduce((s,[id,q])=>s+item(id).price*q,0);
